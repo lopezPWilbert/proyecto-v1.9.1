@@ -1,0 +1,16 @@
+1.1 Añadiendo Facebook
+1.2 Reparado formulario de denuncia
+1.3 acoplando formulario con mapa y obtener sus coordenadas
+	Denuncia listo con mapas
+	Vista de mapas con las denuncias hechas.
+	FALTA:
+		-Agregar link a cada marker para ver detalles
+		-Dejar que si no tiene video, aun asi se suba.
+		-Si hay saltos de linea o acentos en la descripcion o titulo, se arruina todo.
+		-Arreglar estilos.
+
+1.5 Fusion con formulario triple 
+	Falta validar formulario triple
+	Agregar varias formularios a la vez
+
+	Agregar decorador de login aceptado
