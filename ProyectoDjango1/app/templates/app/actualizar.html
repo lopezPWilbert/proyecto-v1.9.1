@@ -6,14 +6,67 @@
 <div class="container mt-5 pt-5">
 	<div class="row">
 		<div class="col">
-			<form method="POST" class="form-control" enctype="multipart/form-data">
+			<form method="POST" class="form-control" enctype="multipart/form-data" id="formu">
 				{% csrf_token %}
 				 {{ form.as_p }}
-				 <input type="submit" value="Actualizar">
+				 <!--<input type="submit" value="Actualizar">-->
+                <input type="button" value="Actualizar"  onclick="validar()">
 				 <input type="reset" value="Cancel">
 			</form>	
 		</div>
 	</div>
 </div>
 
+<script>
+    //1.9.2 mas validaciones
+    function validar() {
+        var avatar = true;
+        var tel = true;
+        var dir = true;
+
+        var tel = document.getElementById('id_Telefono').value;
+        var dir = document.getElementById('id_Direccion').value;
+        var avatar = document.getElementById('id_Avatar').files;
+
+        var extensiones = /(image\/jpg|image\/jpeg|image\/png|image\/gif)$/i;
+         var tex_R = /[0-9]{10}/g;
+
+         if (avatar.length != 0) {
+             if (!extensiones.exec(avatar[0].type)) {
+                 swal(
+                     'Advertencia:',
+                     'Debe de proporcionar un archivo de imagen tipo .jpg|.jpeg|.png|.gif',
+                     'warning'
+                 );
+                 avatar = false;
+             }
+         }
+         else if ((tel.length >= 1 && tel.length<10) || tel.length > 10 || tel[0]==0) {
+             swal(
+                 'Advertencia:',
+                 'Debe de proporcionar un Telefono de 10 digitos que no inicie en 0, odejar vacio',
+                 'warning'
+             );
+             tel = false
+         }
+         else if (dir.length>100)
+         {
+                          swal(
+                 'Advertencia:',
+                 'La direccion no puede superar 100 caracteres.',
+                 'warning'
+                          );
+                          dir = false;
+         }else {
+            document.forms['formu'].submit();
+         }
+         if (avatar && tel && dir)
+         {
+             document.forms['formu'].submit();
+         }
+
+        
+    }
+
+</script>
 {% endblock content %}

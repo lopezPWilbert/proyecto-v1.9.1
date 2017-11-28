@@ -54,10 +54,13 @@
     <Folder Include="app\static\app\fonts\" />
     <Folder Include="app\static\app\scripts\" />
     <Folder Include="app\templates\" />
+    <Folder Include="app\templates\account\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="ProyectoDjango1\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\account\login.html" />
+    <Content Include="app\templates\account\signup.html" />
     <Content Include="app\templates\app\actualizar.html" />
     <Content Include="app\templates\app\base.html" />
     <Content Include="app\templates\app\contador.html" />

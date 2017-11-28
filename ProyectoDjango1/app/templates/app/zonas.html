@@ -372,7 +372,7 @@ document.getElementById("datefield").setAttribute("max", today);
     //1.9.1 validaciones
 
     function validar()
-    {
+    {  
         var desde = document.getElementById('desde').value;
         var hasta = document.getElementById('hasta').value;
         if (desde=="" || hasta=="")
@@ -382,6 +382,7 @@ document.getElementById("datefield").setAttribute("max", today);
                 'Debe seleccionar el rango de fechas.',
                 'warning'
             );
+
         }
         else if (desde>hasta)
         {

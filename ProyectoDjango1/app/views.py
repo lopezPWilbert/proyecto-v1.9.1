@@ -67,7 +67,7 @@ def coordenadas(queryset):
 		v_promedios+=[[(coord_x/len(a)),(coord_y/len(a))]]
 		coord_x=0
 		coord_y=0
-
+	'''
 	coord_x=0
 	coord_y=0
 	for a in v_promedios:
@@ -75,14 +75,17 @@ def coordenadas(queryset):
 		coord_y+=a[1]
 	FinalX=(coord_x/len(v_promedios))
 	FinalY=(coord_y/len(v_promedios))
-	return FinalX,FinalY, m
+	'''
+	return v_promedios, m
+	#return FinalX,FinalY, m
 
 def crear_circulo():
 	circulos=Circulos_m.objects.filter(fecha=(time.strftime("%Y-%m-%d")))
 	if len(circulos)==0:
 		a=Denuncia_m.objects.filter(Q(estado=True)|Q(estado=None))
-		_x,_y,m=coordenadas(a)
-		Circulos_m.objects.create(x=_x, y=_y, cantidad=m)
+		v,m=coordenadas(a)
+		for Vv in v:
+			Circulos_m.objects.create(x=Vv[0], y=Vv[1], cantidad=m)
 def Zonas(request):
 	
 	if request.POST:
@@ -138,6 +141,8 @@ class Mapa(ListView):
 	model=Denuncia_m
 	#1.7 reportes
 	def get_queryset(self):
+		Denuncia_m.objects.filter(hasta__lt=(time.strftime("%Y-%m-%d"))).update(estado=False)
+		Denuncia_m.objects.filter(hasta__gte=(time.strftime("%Y-%m-%d"))).update(estado=True)
 		crear_circulo()
 		queryset = super(Mapa, self).get_queryset()
 		return queryset.filter(Q(estado=True)|Q(estado=None))

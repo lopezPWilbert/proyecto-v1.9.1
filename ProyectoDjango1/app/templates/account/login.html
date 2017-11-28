@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     {% load staticfiles %}
@@ -266,7 +266,8 @@
 
 	  <i class="inside fa fa-lock"></i><input class="form-control inp" type="Password" placeholder="Repita la Contraseña" required="required"  name="password2" id="id_password2" />
 
-	 <button class="btn-submit enviar" type="submit">Registrarme</button>
+	 <!--<button class="btn-submit enviar" type="submit">Registrarme orgi</button>-->
+        <button class="btn-submit enviar" type="button" onclick="validar()">Registrarme</button>
 	 <div class="linea"></div>
 	 <div class="title-label bg-register">&nbsp;Registrate con </div>
 	 <div class="social-login">
@@ -337,7 +338,37 @@
   });
 });
     </script>
+    <script>
+        var p1 = document.getElementById('id_password1').value;
+        var p2 = document.getElementById('id_password2').value;
+        
+        var tex_R = /(([\d]+[A-Za-z]+)|[A-Za-z]+[\d]+$)/g;
 
+        if (p1.length < 8) {
+            swal(
+                'Advertencia:',
+                'La contrase&ntilde;a debe ser de al menos 8 caracteres con numeros y letras.',
+                'warning'
+            );
+        }
+        else if (!tex_R.exec(p1)) {
+            swal(
+                'Advertencia:',
+                'La contrase&ntilde;a debe iniciar con un numero y terminar con una letra.',
+                'warning'
+            );
+        }
+        else if (p1 != p2) {
+            swal(
+                'Advertencia:',
+                'Las contrase&ntilde;as no son iguales.',
+                'warning'
+            );
+        } else {
+            document.forms['signup_form'].submit();
+        }
+
+    </script>
 
 </body>
 </html>
